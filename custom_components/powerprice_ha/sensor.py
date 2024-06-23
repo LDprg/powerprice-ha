@@ -8,6 +8,10 @@ from homeassistant.core import HomeAssistant
 from homeassistant.core import Event, EventStateChangedData, callback
 from homeassistant.helpers.event import async_track_state_change_event
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.const import (
+    STATE_UNAVAILABLE,
+    STATE_UNKNOWN,
+)
 
 from . import const as pp
 
@@ -51,8 +55,8 @@ class PPSensor(SensorEntity):
         if (
             energy is not None
             and price is not None
-            and energy.state is not None
-            and price.state is not None
+            and energy.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
+            and price.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
         ):
             self._attr_native_value = float(energy.state) * float(price.state)
 
@@ -78,8 +82,8 @@ class PPSensor(SensorEntity):
         if (
             energy is not None
             and price is not None
-            and energy.state is not None
-            and price.state is not None
+            and energy.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
+            and price.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
         ):
             self._attr_native_value = float(energy.state) * float(price.state)
         self.async_write_ha_state()
@@ -94,8 +98,8 @@ class PPSensor(SensorEntity):
         if (
             energy is not None
             and price is not None
-            and energy.state is not None
-            and price.state is not None
+            and energy.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
+            and price.state not in (STATE_UNKNOWN, STATE_UNAVAILABLE)
         ):
             self._attr_native_value = float(energy.state) * float(price.state)
         self.async_write_ha_state()
