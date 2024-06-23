@@ -1,0 +1,16 @@
+{
+  "domain": "powerprice_ha",
+  "name": "Powerprice HA",
+  "codeowners": [
+    "@LDprg"
+  ],
+  "config_flow": true,
+  "requirements": [],
+  "documentation": "https://github.com/LDprg/powerprice-ha",
+  "issue_tracker": "https://github.com/LDprg/powerprice-ha/issues",
+  "iot_class": "calculated",
+  "loggers": [
+    "custom_components.powerprice_ha"
+  ],
+  "version": "0.0.0"
+}
