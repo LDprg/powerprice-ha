@@ -46,9 +46,15 @@ class PPSensor(SensorEntity):
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
 
-        self._attr_native_value = self.hass.states.get(
-            self.entity_id,
-        ).state
+        self._attr_native_value = float(
+            self.hass.states.get(
+                self.entity_id,
+            ).state,
+        ) * float(
+            self.hass.states.get(
+                self.price_id,
+            ).state,
+        )
 
         async_track_state_change_event(
             self.hass,
@@ -67,7 +73,7 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        self._attr_native_value = int(event.data["new_state"].state) * int(
+        self._attr_native_value = float(event.data["new_state"].state) * float(
             self.hass.states.get(
                 self.price_id,
             ).state,
@@ -79,7 +85,7 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        self._attr_native_value = int(event.data["new_state"].state) * int(
+        self._attr_native_value = float(event.data["new_state"].state) * float(
             self.hass.states.get(
                 self.entity_id,
             ).state,
