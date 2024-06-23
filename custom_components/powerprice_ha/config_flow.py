@@ -2,14 +2,9 @@
 
 from __future__ import annotations
 
-import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from homeassistant.components.input_boolean import (
-    DOMAIN as INPUT_BOOLEAN_DOMAIN,
-)
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
 from homeassistant.config_entries import ConfigFlow
-from homeassistant.const import CONF_COUNT
 from homeassistant.const import CONF_ENTITY_ID
 from homeassistant.helpers import selector
 
@@ -41,7 +36,7 @@ class IrrigationHaFlow(ConfigFlow, domain=irri.DOMAIN):
                     vol.Required(CONF_ENTITY_ID): selector.EntitySelector(
                         selector.EntitySelectorConfig(
                             domain=[
-                                SENSOR_DOMAIN
+                                SENSOR_DOMAIN,
                             ],
                             multiple=False,
                         ),
