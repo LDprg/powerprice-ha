@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.core import Event, EventStateChangedData, callback
+from homeassistant.core import HomeAssistant, Event, EventStateChangedData, callback
 from homeassistant.helpers.event import async_track_state_change_event
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.const import (
@@ -49,6 +48,8 @@ class PPSensor(SensorEntity):
 
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
+
+        self._attr_device_class = SensorDeviceClass.MONETARY
 
         energy = self.hass.states.get(self.energy_id)
         price = self.hass.states.get(self.price_id)
