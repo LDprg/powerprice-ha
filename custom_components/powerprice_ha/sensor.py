@@ -32,29 +32,24 @@ async def async_setup_entry(
 class PPSensor(SensorEntity):
     """Representation of a Sensor."""
 
-    def __init__(self, hass, config, postfix):
+    def __init__(self, hass, config, suffix):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__()
 
         self.hass = hass
         self.config = config
 
-        self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID] + postfix
+        self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID] + suffix
         self.price_id = self.config[pp.CONF_PRICE_ENTITY_ID]
-        self.uid = self.energy_id.removesuffix("_energy") + "_price" + postfix
+        self.uid = self.energy_id.removesuffix("_energy" + suffix) + "_price" + suffix
 
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
 
-        self._attr_native_value = float(
-            self.hass.states.get(
-                self.energy_id,
-            ).state,
-        ) * float(
-            self.hass.states.get(
-                self.price_id,
-            ).state,
-        )
+        energy = self.hass.states.get(self.energy_id).state
+        price = self.hass.states.get(self.price_id).state
+        if energy is not None and price is not None:
+            self._attr_native_value = float(energy) * float(price)
 
         async_track_state_change_event(
             self.hass,
@@ -73,11 +68,10 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        self._attr_native_value = float(event.data["new_state"].state) * float(
-            self.hass.states.get(
-                self.price_id,
-            ).state,
-        )
+        energy = event.data["new_state"].state
+        price = self.hass.states.get(self.price_id).state
+        if energy is not None and price is not None:
+            self._attr_native_value = float(energy) * float(price)
         self.async_write_ha_state()
 
     @callback
@@ -85,9 +79,8 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        self._attr_native_value = float(event.data["new_state"].state) * float(
-            self.hass.states.get(
-                self.energy_id,
-            ).state,
-        )
+        energy = self.hass.states.get(self.energy_id).state
+        price = event.data["new_state"].state
+        if energy is not None and price is not None:
+            self._attr_native_value = float(energy) * float(price)
         self.async_write_ha_state()
