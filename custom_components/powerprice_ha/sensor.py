@@ -39,16 +39,16 @@ class PPSensor(SensorEntity):
         self.hass = hass
         self.config = config
 
-        self.entity_id = self.config[pp.CONF_ENERGY_ENTITY_ID]
+        self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID]
         self.price_id = self.config[pp.CONF_PRICE_ENTITY_ID]
-        self.uid = self.entity_id.removesuffix("_energy") + "_" + postfix
+        self.uid = self.energy_id.removesuffix("_energy") + "_" + postfix
 
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
 
         self._attr_native_value = float(
             self.hass.states.get(
-                self.entity_id,
+                self.energy_id,
             ).state,
         ) * float(
             self.hass.states.get(
@@ -87,7 +87,7 @@ class PPSensor(SensorEntity):
     ) -> None:
         self._attr_native_value = float(event.data["new_state"].state) * float(
             self.hass.states.get(
-                self.entity_id,
+                self.energy_id,
             ).state,
         )
         self.async_write_ha_state()
