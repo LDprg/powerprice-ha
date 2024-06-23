@@ -4,12 +4,10 @@
       "user": {
         "title": "Fill in your Powerprice config",
         "data": {
-          "entity_id": "Energy entity id"
+          "energy_entity_id": "Energy Entity ID",
+          "price_entity_id": "Price Entity ID"
         }
       }
-    },
-    "error": {
-      "already_configured": "Device is already configured"
     }
   }
 }
