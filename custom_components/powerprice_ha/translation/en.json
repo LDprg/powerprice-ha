@@ -2,10 +2,9 @@
   "config": {
     "step": {
       "user": {
-        "title": "Fill in your Irrigation config",
+        "title": "Fill in your Powerprice config",
         "data": {
-          "entity_id": "Irrigation entity id",
-          "count": "Interval count"
+          "entity_id": "Energy entity id"
         }
       }
     },
