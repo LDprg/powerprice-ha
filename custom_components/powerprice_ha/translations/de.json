@@ -8,6 +8,10 @@
           "price_entity_id": "Preis Entity ID"
         }
       }
+    },
+    "abort": {
+      "unknown": "Unknown error occurred",
+      "already_configured": "Sensor is already configured"
     }
   }
 }

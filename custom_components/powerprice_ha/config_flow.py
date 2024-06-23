@@ -49,6 +49,3 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
                 },
             ),
         )
-
-    async def async_step_reconfigure(self, user_input):
-        return await self.async_step_user(user_input)

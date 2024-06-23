@@ -46,10 +46,15 @@ class PPSensor(SensorEntity):
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
 
-        energy = self.hass.states.get(self.energy_id).state
-        price = self.hass.states.get(self.price_id).state
-        if energy is not None and price is not None:
-            self._attr_native_value = float(energy) * float(price)
+        energy = self.hass.states.get(self.energy_id)
+        price = self.hass.states.get(self.price_id)
+        if (
+            energy is not None
+            and price is not None
+            and energy.state is not None
+            and price.state is not None
+        ):
+            self._attr_native_value = float(energy.state) * float(price.state)
 
         async_track_state_change_event(
             self.hass,
@@ -68,10 +73,15 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        energy = event.data["new_state"].state
-        price = self.hass.states.get(self.price_id).state
-        if energy is not None and price is not None:
-            self._attr_native_value = float(energy) * float(price)
+        energy = event.data["new_state"]
+        price = self.hass.states.get(self.price_id)
+        if (
+            energy is not None
+            and price is not None
+            and energy.state is not None
+            and price.state is not None
+        ):
+            self._attr_native_value = float(energy.state) * float(price.state)
         self.async_write_ha_state()
 
     @callback
@@ -79,8 +89,13 @@ class PPSensor(SensorEntity):
         self,
         event: Event[EventStateChangedData] | None = None,
     ) -> None:
-        energy = self.hass.states.get(self.energy_id).state
-        price = event.data["new_state"].state
-        if energy is not None and price is not None:
-            self._attr_native_value = float(energy) * float(price)
+        energy = self.hass.states.get(self.energy_id)
+        price = event.data["new_state"]
+        if (
+            energy is not None
+            and price is not None
+            and energy.state is not None
+            and price.state is not None
+        ):
+            self._attr_native_value = float(energy.state) * float(price.state)
         self.async_write_ha_state()
