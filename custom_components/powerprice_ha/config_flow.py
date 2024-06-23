@@ -41,6 +41,7 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
                     vol.Required(pp.CONF_PRICE_ENTITY_ID): selector.EntitySelector(
                         selector.EntitySelectorConfig(
                             domain=[
+                                SENSOR_DOMAIN,
                                 INPUT_NUMBER_DOMAIN,
                             ],
                             multiple=False,
