@@ -24,7 +24,7 @@ async def async_setup_entry(
     async_add_entities(
         [
             PPSensor(hass, config, name)
-            for name in ["price", "price_daily", "price_monthly", "price_yearly"]
+            for name in ["", "_daily", "_monthly", "_yearly"]
         ],
     )
 
@@ -39,9 +39,9 @@ class PPSensor(SensorEntity):
         self.hass = hass
         self.config = config
 
-        self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID]
+        self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID] + postfix
         self.price_id = self.config[pp.CONF_PRICE_ENTITY_ID]
-        self.uid = self.energy_id.removesuffix("_energy") + "_" + postfix
+        self.uid = self.energy_id.removesuffix("_energy") + "_price" + postfix
 
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
