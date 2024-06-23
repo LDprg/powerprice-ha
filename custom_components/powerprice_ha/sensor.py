@@ -50,6 +50,7 @@ class PPSensor(SensorEntity):
         self._attr_unique_id = self.uid
 
         self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_native_unit_of_measurement = "€"
 
         energy = self.hass.states.get(self.energy_id)
         price = self.hass.states.get(self.price_id)
