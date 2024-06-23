@@ -1,7 +1,7 @@
 {
   "config": {
     "step": {
-      "user": {
+      "init": {
         "title": "Fill in your Powerprice config",
         "data": {
           "energy_entity_id": "Energy Entity ID",

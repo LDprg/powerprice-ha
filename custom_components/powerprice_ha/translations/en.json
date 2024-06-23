@@ -1,11 +1,11 @@
 {
   "config": {
     "step": {
-      "user": {
-        "title": "Fülle deine Powerprice configuration aus",
+      "init": {
+        "title": "Fill in your Powerprice config",
         "data": {
           "energy_entity_id": "Energy Entity ID",
-          "price_entity_id": "Preis Entity ID"
+          "price_entity_id": "Price Entity ID"
         }
       }
     }

@@ -1,6 +1,7 @@
 """Config flow"""
 
 from __future__ import annotations
+from typing import Any
 
 import voluptuous as vol
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
@@ -16,10 +17,7 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
     config flow
     """
 
-    async def async_step_user(
-        self,
-        user_input,
-    ):
+    async def async_step_init(self, user_input: dict[str, Any] | None = None):
         """
         Init step
         """
@@ -52,3 +50,6 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
                 },
             ),
         )
+
+    async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
+        return self.async_step_init(user_input)
