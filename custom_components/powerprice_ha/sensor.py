@@ -58,7 +58,7 @@ class PPSensor(SensorEntity):
 
         async_track_state_change_event(
             self.hass,
-            self.entity_id,
+            self.energy_id,
             self.async_state_changed_listener_energy,
         )
 
