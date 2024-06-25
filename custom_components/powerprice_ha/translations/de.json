@@ -8,25 +8,6 @@
           "price_entity_id": "Preis Entity ID"
         }
       }
-    },
-    "abort": {
-      "unknown": "Unknown error occurred",
-      "already_configured": "Sensor is already configured"
-    }
-  },
-  "options": {
-    "step": {
-      "init": {
-        "title": "Fülle deine Powerprice configuration aus",
-        "data": {
-          "energy_entity_id": "Energy Entity ID",
-          "price_entity_id": "Preis Entity ID"
-        }
-      }
-    },
-    "abort": {
-      "unknown": "Unknown error occurred",
-      "already_configured": "Sensor is already configured"
     }
   }
 }
