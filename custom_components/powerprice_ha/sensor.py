@@ -44,7 +44,11 @@ class PPSensor(SensorEntity):
 
         self.energy_id = self.config[pp.CONF_ENERGY_ENTITY_ID] + suffix
         self.price_id = self.config[pp.CONF_PRICE_ENTITY_ID]
-        self.uid = self.energy_id.removesuffix("_energy" + suffix) + "_price" + suffix
+        self.uid = (
+            self.energy_id.removeprefix("sensor.").removesuffix("_energy" + suffix)
+            + "_price"
+            + suffix
+        )
 
         self._attr_name = self.uid
         self._attr_unique_id = self.uid
