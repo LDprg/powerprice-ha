@@ -73,6 +73,8 @@ class OptionsFlowHandler(OptionsFlow):
         user_input,
     ):
         """Manage the options."""
+        self.current_config = dict(self.config_entry.data)
+
         if user_input is not None:
             return self.async_create_entry(
                 title="",
@@ -85,7 +87,7 @@ class OptionsFlowHandler(OptionsFlow):
                 {
                     vol.Required(
                         pp.CONF_ENERGY_ENTITY_ID,
-                        default=self.config_entry.options.get(pp.CONF_ENERGY_ENTITY_ID),
+                        default=self.current_config.get(pp.CONF_ENERGY_ENTITY_ID),
                     ): selector.EntitySelector(
                         selector.EntitySelectorConfig(
                             domain=[
@@ -96,7 +98,7 @@ class OptionsFlowHandler(OptionsFlow):
                     ),
                     vol.Required(
                         pp.CONF_PRICE_ENTITY_ID,
-                        default=self.config_entry.options.get(pp.CONF_PRICE_ENTITY_ID),
+                        default=self.current_config.get(pp.CONF_PRICE_ENTITY_ID),
                     ): selector.EntitySelector(
                         selector.EntitySelectorConfig(
                             domain=[
