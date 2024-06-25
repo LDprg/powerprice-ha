@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import voluptuous as vol
+
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
 from homeassistant.components.input_number import DOMAIN as INPUT_NUMBER_DOMAIN
 from homeassistant.config_entries import ConfigFlow, OptionsFlow, ConfigEntry
 from homeassistant.helpers import selector
+from homeassistant.core import callback
 
 from . import const as pp
 
@@ -53,6 +55,14 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
             step_id="user",
             data_schema=SCHEMA,
         )
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        config_entry: ConfigEntry,
+    ) -> OptionsFlow:
+        """Create the options flow."""
+        return OptionsFlowHandler(config_entry)
 
 
 class OptionsFlowHandler(OptionsFlow):
