@@ -7,6 +7,13 @@
           "energy_entity_id": "Energy Entity ID",
           "price_entity_id": "Preis Entity ID"
         }
+      },
+      "reconfigure": {
+        "title": "Fülle deine Powerprice configuration aus",
+        "data": {
+          "energy_entity_id": "Energy Entity ID",
+          "price_entity_id": "Preis Entity ID"
+        }
       }
     }
   }

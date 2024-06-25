@@ -64,7 +64,7 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
             return self.async_update_reload_and_abort(
                 entry,
                 reason="reconfigure_successful",
-                data={**entry.data, **user_input},
+                data=user_input,
             )
 
         return self.async_show_form(
