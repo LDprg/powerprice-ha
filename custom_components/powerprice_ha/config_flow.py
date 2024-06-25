@@ -18,7 +18,7 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
     config flow
     """
 
-    async def async_step_init(self, user_input):
+    async def async_step_user(self, user_input):
         """
         Init step
         """
@@ -30,7 +30,7 @@ class PowerPriceHaFlow(ConfigFlow, domain=pp.DOMAIN):
             )
 
         return self.async_show_form(
-            step_id="init",
+            step_id="user",
             data_schema=vol.Schema(
                 {
                     vol.Required(pp.CONF_ENERGY_ENTITY_ID): selector.EntitySelector(
@@ -77,7 +77,7 @@ class OptionsFlowHandler(OptionsFlow):
 
         if user_input is not None:
             return self.async_create_entry(
-                title="",
+                title=user_input[pp.CONF_ENERGY_ENTITY_ID],
                 data=user_input,
             )
 
