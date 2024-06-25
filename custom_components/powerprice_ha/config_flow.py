@@ -70,18 +70,18 @@ class OptionsFlowHandler(OptionsFlow):
         """Initialize options flow."""
         self.config_entry = config_entry
 
-    async def async_step_user(
+    async def async_step_init(
         self,
         user_input,
     ):
         """Manage the options."""
         if user_input is not None:
             return self.async_create_entry(
-                title=user_input[pp.CONF_ENERGY_ENTITY_ID],
+                title="",
                 data=user_input,
             )
 
         return self.async_show_form(
-            step_id="user",
+            step_id="init",
             data_schema=SCHEMA,
         )
